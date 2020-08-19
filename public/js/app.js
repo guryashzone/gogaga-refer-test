@@ -16,8 +16,6 @@ document.querySelector('form').addEventListener('submit', (e) => {
 	}
 
 	axios(options).then(response => {
-		console.log(response)
-		
 		if (response.status === 201) {
 			userName.value = userLocation.value = ''
 			message.innerText = 'Data Saved'
@@ -32,7 +30,6 @@ document.querySelector('form').addEventListener('submit', (e) => {
 // Render Data
 const fetchData = () => {
 	message.innerText = 'Searching..'
-	result.innerHTML = ''
 
 	let query = ''
 
@@ -41,7 +38,6 @@ const fetchData = () => {
 	}
 
 	axios.get('/users'+query).then(response => {
-		console.log(response)
 		message.innerText = `Fetched ${response.data.length} rows.`
 		
 		if (response.status !== 200) {
@@ -49,6 +45,7 @@ const fetchData = () => {
 			return message.innerText = 'ERROR: ' + response.statusText
 		}
 		
+		result.innerHTML = ''
 		response.data.forEach((user, i) => {
 			let row = `
 				<tr>
