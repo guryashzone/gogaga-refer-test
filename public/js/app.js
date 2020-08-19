@@ -38,10 +38,9 @@ const fetchData = () => {
 	}
 
 	axios.get('/users'+query).then(response => {
-		message.innerText = `Fetched ${response.data.length} rows.`
+		message.innerHTML = `<span style="color:green">Fetched ${response.data.length} rows.</span>`
 		
 		if (response.status !== 200) {
-
 			return message.innerText = 'ERROR: ' + response.statusText
 		}
 		
@@ -56,7 +55,8 @@ const fetchData = () => {
 			`
 			result.innerHTML += row
 		})
-
+	}).catch(e => {
+		message.innerHTML = `<span style="color:red">Oops! No data found.</span>`
 	})	
 }
 
